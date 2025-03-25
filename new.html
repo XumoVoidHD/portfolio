@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styling for the animated div */
+        #text-container {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            font-family: 'Inter', sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            transition: transform 1s ease-out;
+            z-index: 10;
+        }
+
+        .move-up {
+            transform: translateY(-100%); /* Moves the div out of view */
+        }
+
+        /* Styling for the navbar */
+        #header {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .hidden {
+            opacity: 0;
+            visibility: hidden; /* Hides the navbar during animation */
+        }
+
+        /* Content section */
+        #content {
+            margin-top: 100px; /* Spacing for the content to align */
+            padding: 20px;
+            background-color: lightgray;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="text-container">hello</div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <a href="#hero">Your Name</a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div id="content">
+        <h1>Welcome to the next section</h1>
+        <p>This content and the navbar are revealed after the animation finishes.</p>
+    </div>
+
+    <script>
+        const container = document.getElementById('text-container');
+        const header = document.getElementById('header');
+        const textArray = ['Text 1', 'Text 2', 'Text 3', 'Text 4', 'Text 5', 'Text 6'];
+        let currentIndex = 0;
+
+        // Hide the navbar initially
+        header.classList.add('hidden');
+
+        setTimeout(() => {
+            const interval = setInterval(() => {
+                if (currentIndex >= textArray.length) {
+                    clearInterval(interval); // Stop text animation
+                    container.classList.add('move-up'); // Move animation div up
+
+                    // Reveal the navbar and content after the animation
+                    setTimeout(() => {
+                        header.classList.remove('hidden');
+                    }, 1000); // Matches the animation duration
+                    return;
+                }
+                container.textContent = textArray[currentIndex];
+                currentIndex++;
+            }, 200);
+        }, 500); // Initial delay of 0.5 seconds
+    </script>
+</body>
+</html>
